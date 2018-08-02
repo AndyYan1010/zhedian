@@ -183,11 +183,11 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
                     ToastUtils.showToast(getContext(), "请输入流转卡条码");
                     return;
                 }
-                //TODO:跳转流转卡号对应的内容
+                //跳转流转卡号对应的内容
                 searchFromData(goodsid);
                 break;
             case R.id.bt_submit:
-                //TODO:提交总表到服务器
+                //提交总表到服务器
                 //{"passid": "8182","items":[{"fdate":"2018-07-23","fid":"1010","fentryid":"14","fqty":2,"fbiller":"morningstar","fjyname":"免检","fsfsdgx":"否","fsfmdgx":"是","fsfddgx":"是"}]}
                 String partArg = "{\"passid\": \"8182\",\"items\":[";
                 Date date = new Date();
