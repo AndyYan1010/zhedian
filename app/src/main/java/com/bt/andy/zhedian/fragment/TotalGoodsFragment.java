@@ -111,6 +111,7 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     ToastUtils.showToast(getContext(), "请选择工序");
+                    workProid = "";
                 } else {
                     WorkProceInfo proceInfo = mListProce.get(i);
                     workProid = proceInfo.getFName();//获得工序
@@ -197,7 +198,7 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
                 for (int i = 0; i < mGoodsData.size(); i++) {
                     GoodsInfo goodsInfo = mGoodsData.get(i);
                     String real = goodsInfo.getReal();
-                    if ("".equals(real) || "请点击修改".equals(real)) {
+                    if ("".equals(real) || "请点击修改".equals(real)) {//如果提交数控件上是请点击修改，则数量为0
                         real = "0";
                     }
                     s = "{\"fdate\":\"" + dateNowStr + "\",\"fid\":\"" + goodsInfo.getFid() + "\",\"fqty\":" + real + ",\"fbiller\":\"" + MyAppliaction.uerName + "\",\"fentryid\":\"" + goodsInfo.getFentryid() +
@@ -231,11 +232,12 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
         }
         if (local == 0) {
             ToastUtils.showToast(getContext(), "未在本项目中查找到该流转卡号");
+        } else {
+            local = local + 7;
+            mRecData.set(local, "请点击修改");
+            adapter.notifyDataSetChanged();
+            rec_detail.scrollToPosition(local + 7);
         }
-        local = local + 7;
-        mRecData.set(local, "请点击修改");
-        adapter.notifyDataSetChanged();
-        rec_detail.scrollToPosition(local + 7);
     }
 
     private void scanningCode(int kind) {
