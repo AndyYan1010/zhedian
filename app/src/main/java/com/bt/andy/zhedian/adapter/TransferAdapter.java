@@ -66,14 +66,14 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.ViewHo
         holder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (position <= 7 || position % 8 != 7) {
+                if (position <= 7 || position % 8 != 2) {
                     return;
                 }
-                String sNum = mList.get(position - 3);//总计划数
-                String surplusNum = mList.get(position - 2);//剩余计划数
+                String sNum = mList.get(position + 4);//总计划数
+                String surplusNum = mList.get(position - 1);//剩余计划数
                 double num = Double.parseDouble(sNum);
                 double levnum = Double.parseDouble(surplusNum);
-                String sHDone = mList.get(position - 1);//接收数
+                String sHDone = mList.get(position + 5);//接收数
                 double rec = Double.parseDouble(sHDone);
                 //弹出一个Dialog，修改数据
                 showDialogToChange(holder.tv_name, num, levnum, rec, position);

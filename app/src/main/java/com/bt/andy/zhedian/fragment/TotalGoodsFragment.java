@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.bt.andy.zhedian.MyAppliaction;
 import com.bt.andy.zhedian.R;
+import com.bt.andy.zhedian.activity.SaomiaoUIActivity;
 import com.bt.andy.zhedian.adapter.SelectWorkProceAdapter;
 import com.bt.andy.zhedian.adapter.TransferAdapter;
 import com.bt.andy.zhedian.messegeInfo.GoodsInfo;
@@ -35,7 +36,6 @@ import com.bt.andy.zhedian.utils.ProgressDialogUtil;
 import com.bt.andy.zhedian.utils.SoapUtil;
 import com.bt.andy.zhedian.utils.ToastUtils;
 import com.google.gson.Gson;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.json.JSONArray;
@@ -198,7 +198,7 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
                 for (int i = 0; i < mGoodsData.size(); i++) {
                     GoodsInfo goodsInfo = mGoodsData.get(i);
                     String real = goodsInfo.getReal();
-                    if ("".equals(real) || "请点击修改".equals(real)) {//如果提交数控件上是请点击修改，则数量为0
+                    if ("".equals(real) || "请点击修改".equals(real)) {//如果提交数控件上是"请点击修改"或""，则数量为0
                         real = "0";
                     }
                     s = "{\"fdate\":\"" + dateNowStr + "\",\"fid\":\"" + goodsInfo.getFid() + "\",\"fqty\":" + real + ",\"fbiller\":\"" + MyAppliaction.uerName + "\",\"fentryid\":\"" + goodsInfo.getFentryid() +
@@ -233,10 +233,10 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
         if (local == 0) {
             ToastUtils.showToast(getContext(), "未在本项目中查找到该流转卡号");
         } else {
-            local = local + 7;
+            local = local - 1;
             mRecData.set(local, "请点击修改");
             adapter.notifyDataSetChanged();
-            rec_detail.scrollToPosition(local + 7);
+            rec_detail.scrollToPosition(local - 1);
         }
     }
 
@@ -248,7 +248,8 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
             ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_CALL_PHONE2);
         } else {
-            Intent intent = new Intent(getContext(), CaptureActivity.class);
+            //            Intent intent = new Intent(getContext(), CaptureActivity.class);
+            Intent intent = new Intent(getContext(), SaomiaoUIActivity.class);
             if (kind == 0) {
                 startActivityForResult(intent, REQUEST_CODE0);
             } else {
@@ -425,14 +426,14 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
                         String plannum = goodsInfo1.getPlannum();
                         String accept = goodsInfo1.getAccept();
                         String real = goodsInfo1.getReal();
-                        mRecData.add(goodsid);
-                        mRecData.add(picid);
-                        mRecData.add(name);
-                        mRecData.add(speci);
-                        mRecData.add(oriPlan);
-                        mRecData.add(plannum);
-                        mRecData.add(accept);
-                        mRecData.add(real);
+                        mRecData.add(picid);//图号0
+                        mRecData.add(plannum);//剩余计划数1
+                        mRecData.add(real);//实作数2
+                        mRecData.add(goodsid);//流转卡号3
+                        mRecData.add(name);//名称4
+                        mRecData.add(speci);//规格5
+                        mRecData.add(oriPlan);//总计划6
+                        mRecData.add(accept);//接收数7
                     }
                     adapter.notifyDataSetChanged();
                     mBt_submit.setVisibility(View.VISIBLE);
