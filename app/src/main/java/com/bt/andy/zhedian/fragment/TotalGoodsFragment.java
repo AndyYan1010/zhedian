@@ -230,7 +230,7 @@ public class TotalGoodsFragment extends Fragment implements View.OnClickListener
                 local = i;
             }
         }
-        if (local == 0) {
+        if (local <= 3) {
             ToastUtils.showToast(getContext(), "未在本项目中查找到该流转卡号");
         } else {
             local = local - 1;

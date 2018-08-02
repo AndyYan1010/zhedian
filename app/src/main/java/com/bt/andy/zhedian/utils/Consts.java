@@ -1,7 +1,7 @@
 package com.bt.andy.zhedian.utils;
 
 public class Consts {
-    //    public static String ENDPOINT = "http://2o1b417794.51mypc.cn:9098/service1.asmx";//容贝的
+//        public static String ENDPOINT = "http://2o1b417794.51mypc.cn:9098/service1.asmx";//容贝的
     public static String ENDPOINT = "http://215yt62548.iok.la:10843/service1.asmx";//柘电的
     //登录接口
     public static String Login    = "ja_login";
