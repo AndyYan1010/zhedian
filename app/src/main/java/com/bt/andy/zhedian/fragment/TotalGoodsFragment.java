@@ -2,7 +2,6 @@ package com.bt.andy.zhedian.fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -60,7 +59,6 @@ import java.util.Map;
 public class TotalGoodsFragment extends Fragment implements View.OnClickListener {
     private View                   mRootView;
     private TextView               mTv_title;
-    private Dialog                 dialog;
     private Spinner                spi_cho;
     private SelectWorkProceAdapter workProceAdapter;//工序选择适配器
     private String workProid = "";//记录工序
